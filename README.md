@@ -1,31 +1,125 @@
-A Github Pages template for academic websites. This was forked (then detached) by [Stuart Geiger](https://github.com/staeiou) from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/), which is © 2016 Michael Rose and released under the MIT License. See LICENSE.md.
+> This HuWeihuang theme created by [HuWeihuang](http://www.huweihuang.com/) modified from the original Porter [YuHsuan](https://github.com/YenYuHsuan/hexo-theme-beantech)
+> 
+> This theme has been published to the [hexo theme list](https://hexo.io/themes/).
 
-I think I've got things running smoothly and fixed some major bugs, but feel free to file issues or make pull requests if you want to improve the generic template / theme.
+# Live Demo
 
-### Note: if you are using this repo and now get a notification about a security vulnerability, delete the Gemfile.lock file. 
+Hu Weihuang Blog : [www.huweihuang.com](http://www.huweihuang.com/)
 
-# Instructions
+![Theme_HuWeihuang](https://res.cloudinary.com/dqxtn0ick/image/upload/v1553666111/blog/blog.jpg)
 
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Fork [this repository](https://github.com/academicpages/academicpages.github.io) by clicking the "fork" button in the top right. 
-1. Go to the repository's settings (rightmost item in the tabs that start with "Code", should be below "Unwatch"). Rename the repository "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and create content & metadata (see below -- also see [this set of diffs](http://archive.is/3TPas) showing what files were changed to set up [an example site](https://getorg-testacct.github.io) for a user with the username "getorg-testacct")
-1. Upload any files (like PDFs, .zip files, etc.) to the files/ directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
-1. (Optional) Use the Jupyter notebooks or python scripts in the `markdown_generator` folder to generate markdown files for publications and talks from a TSV file.
+# Copyright Notice
 
-See more info at https://academicpages.github.io/
+**You can free to use this theme, but you need to keep the following copyright notice on the website.**
 
-## To run locally (not on GitHub Pages, to serve on your own computer)
+<img src="https://res.cloudinary.com/dqxtn0ick/image/upload/v1537879475/header/copyright.png" width="55%">
 
-1. Clone the repository and made updates as detailed above
-1. Make sure you have ruby-dev, bundler, and nodejs installed: `sudo apt install ruby-dev ruby-bundler nodejs`
-1. Run `bundle clean` to clean up the directory (no need to run `--force`)
-1. Run `bundle install` to install ruby dependencies. If you get errors, delete Gemfile.lock and try again.
-1. Run `bundle exec jekyll liveserve` to generate the HTML and serve it from `localhost:4000` the local server will automatically rebuild and refresh the pages on change.
+# Install Hexo
 
-# Changelog -- bugfixes and enhancements
+Install Node.js  and Git
 
-There is one logistical issue with a ready-to-fork template theme like academic pages that makes it a little tricky to get bug fixes and updates to the core theme. If you fork this repository, customize it, then pull again, you'll probably get merge conflicts. If you want to save your various .yml configuration files and markdown files, you can delete the repository and fork it again. Or you can manually patch. 
+```shell
+#For Mac
+brew install node
+brew install git
+```
 
-To support this, all changes to the underlying code appear as a closed issue with the tag 'code change' -- get the list [here](https://github.com/academicpages/academicpages.github.io/issues?q=is%3Aclosed%20is%3Aissue%20label%3A%22code%20change%22%20). Each issue thread includes a comment linking to the single commit or a diff across multiple commits, so those with forked repositories can easily identify what they need to patch.
+Install hexo
+
+```shell
+npm install hexo-cli -g
+
+#For more:https://hexo.io/zh-cn/index.html
+```
+
+# Theme Usage
+
+## Init
+
+```bash
+git clone https://github.com/huweihuang/hexo-theme-huweihuang.git ./hexo-huweihuang
+cd hexo-huweihuang
+npm install
+```
+
+## Modify
+Modify `_config.yml` file with your own info.
+Especially the section:
+### Deployment
+Replace to your own repo!
+```yml
+deploy:
+  type: git
+  repo: https://github.com/<yourAccount>/<repo>
+  branch: <your-branch>
+```
+
+### Sidebar settings
+Copy your avatar image to `<root>/img/` and modify the `_config.yml`:
+```yml
+sidebar: true    # whether or not using Sidebar.
+sidebar-about-description: "<your description>"
+sidebar-avatar: img/<your avatar path>
+```
+and activate your personal widget you like
+```yml
+widgets:         # here are widget you can use, you can comment out
+- featured-tags
+- short-about
+- recent-posts
+- friends-blog
+- archive
+- category
+```
+if you want to add sidebar widget, please add at `layout/_widget`.
+### Signature Setup
+Copy your signature image to `<root>/img/signature` and modify the `_config.yml`:
+```yml
+signature: true   # show signature
+signature-img: img/signature/<your-signature-ID>
+```
+### Go to top icon Setup
+My icon is using iron man, you can change to your own icon at `css/image`.
+
+### Post tag
+You can decide to show post tags or not.
+```yml
+home_posts_tag: true
+```
+ ![tag](https://raw.githubusercontent.com/huweihuang/hexo-theme-huweihuang/master/source/img/article/tag.png)
+### Markdown render
+My markdown render engine plugin is [hexo-renderer-markdown-it](https://github.com/celsomiranda/hexo-renderer-markdown-it).
+```yml
+# Markdown-it config
+## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: '“”‘’'
+```
+and if you want to change the header anchor 'ℬ', you can go to `layout/post.ejs` to change it.
+```javascript
+async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: ℬ // this is the header anchor "unicode" icon
+        };
+```
+
+## Hexo Basics
+Some hexo command:
+```bash
+hexo new post "<post name>" # you can change post to another layout if you want
+hexo clean && hexo generate # generate the static file
+hexo server # run hexo in local environment
+hexo deploy # hexo will push the static files automatically into the specific branch(gh-pages) of your repo!
+```
+
+# Have fun ^_^ 
+Please <a class="github-button" href="https://github.com/huweihuang/hexo-theme-huweihuang" data-icon="octicon-star" aria-label="Star huweihuang/hexo-theme-huweihuang on GitHub">Star</a> this Project if you like it! <a class="github-button" href="https://github.com/huweihuang" aria-label="Follow @huweihuang on GitHub">Follow</a> would also be appreciated!
+Peace!
